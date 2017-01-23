@@ -1,0 +1,77 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Flot Examples: Toggling Series</title>
+	<link href="../style/maxwell-plot.css" rel="stylesheet" type="text/css">
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
+	<script language="javascript" type="text/javascript" src="../lib/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="../lib/jquery.flot.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+
+		function createMaxwell(m,k,T)
+		{
+			var datasets = [{
+				label: "Maxwell distribution",
+				data: []
+			}];
+
+			for(var v = 0; v<150; v=v+0.2){
+				val = Math.pow(m/(Math.PI*2*k*T),1.5) *4*Math.PI*v*v* Math.exp(-(m*v*v)/(2*k*T));
+				datasets[0].data.push([v,val]);
+			}
+			return datasets;
+		}
+
+		// hard-code color indices to prevent them from shifting as
+		// countries are turned on/off
+
+		// insert checkboxes 
+		
+		function plot() {
+
+			var m = 0.001 * $("#mass").val();
+			var k = 1;
+			var T = 1 * $("#temperature").val();
+
+			var datasets = createMaxwell(m,k,T);
+			
+			$.plot("#placeholder", datasets, {
+				yaxis: {
+					min: 0, max: 0.125,
+				},
+				xaxis: {
+					tickDecimals: 0
+				}
+			});
+		}
+
+		plot();
+
+		$("#mass").on('change', plot);
+		$("#temperature").on('change', plot);
+	});
+
+	</script>
+</head>
+<body>
+
+	<div id="content">
+
+		<div class="demo-container">
+			<div style="position:relative;-webkit-transform: rotate(-90deg) translateX(310px) translateY(-350px); font-size:13px;"><b>probability</b> </div>
+			<div style="position:relative; left:700px; top: 400px;  font-size:13px;"><b>velocity</b></div>
+			<div id="placeholder" class="demo-placeholder" style="width:800px;height:450px; margin-top:-25px"></div>
+			<p id="choices" style="margin-top:40px">
+				Mass: <input type="range" id="mass" min="1" max="200" value="5" style="margin-right:40px">
+				Temperature: <input type="range" id="temperature" min="1" max="200" value="5">
+			</p>
+		</div>
+
+	</div>
+
+</body>
+</html>

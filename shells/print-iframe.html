@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8">
+<title>PRINTING DZSLIDES VIA IFRAMES</title>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+
+<style>
+  iframe {
+    border: none;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
+<script>
+  var slideURL = window.prompt("What is the URL of the slides?");
+  // this is still not automated
+  var totalNumOfSlides = window.prompt("Please enter the number of slides in your presentation",10);
+  var widthSlides = window.prompt("Please enter the width of the slides",800);
+  var heightSlides = window.prompt("Please enter the width of the slides",600);
+
+  $("head").append("<style>\n.slides{width:"+widthSlides*0.5 +
+    "px; height: "+heightSlides*0.5 +"px; page-break-after: always}\n"+
+    "@page{size: " + 8.0*widthSlides/800.0 + "cm " + 6.0*heightSlides/600.0 + "cm;}</style>");
+
+  var curSlide = 0;
+  function setSlide() {
+      if(curSlide > totalNumOfSlides) return;
+      var iframe = $("iframe")[curSlide];
+      var slideNumber = curSlide + 1;
+      // I think there is no way to determine the last incremantal
+      // 1000 should be sufficient for that ;)
+      iframe.src = iframe.url = slideURL+"#"+slideNumber+".e";
+      curSlide = slideNumber;
+      // depending on how intense it is to render the slides you might want
+      // to wait for them to be rendered before the next slide is inserted
+      setTimeout(setSlide, 30);
+  }
+  $(function(){
+    for(var i=0; i<totalNumOfSlides; i++)
+    {
+        var slideDiv = document.createElement("div");
+        slideDiv.className = "slides";
+        slideDiv.innerHTML = "<iframe allowfullscreen mozallowfullscreen webkitallowfullscreen></iframe>";
+        $("body").append(slideDiv);        
+    }
+    setTimeout(setSlide, 0);
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+	<head>
+    	<meta charset="utf-8">
+    	<title>HPP Lattice Gas Automaton</title>
+    	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    	<script src="setups.js"></script>
+		<script data-main="build/lgaWeb" src="lib/require.js"></script>
+	</head>
+	<body>
+		<canvas width="800" height="400" id="canvasCanvas" style="transform: scale(2,2);-webkit-transform: scale(1.8,1.8) translate(200px,100px);"></canvas>
+		<script>
+			requirejs(["lgaWeb",
+				"hpp",
+				"ui/squareHPPLattice",
+				"ui/gridUI"],
+			  function(WebApp,HPP,SquareLatticeUI,gridUI){
+				var size = {width: 200, height: 40};
+				var atm = WebApp.createAutomaton(size, HPP)
+				var animID;
+				var steps = 0;
+				var redraw_every = 1;
+				var initializer = {
+					'Random': allRandom,
+					'Corner': cornerInitialize,
+					'Lines': oneLine,
+					'centerBlock': centerBlock,
+					'centerSphere': centerSphere,
+                                        'leftPropagation': left,
+				};
+				var c=document.getElementById("canvasCanvas");
+				var ctx=c.getContext("2d");
+				ctx.scale(4,4);
+				var implementation = {
+					automaton: atm,
+					App: {
+						initializer: initializer,
+						initializeOptions: initializer,
+						updateVisual: function(atm) { 
+							gridUI.canvasRenderer.drawState(atm,ctx);
+						},
+						updateSimulation: function(atm) { return atm.evolve(); },
+						domElement: "controls"
+					}
+				};
+				var animId;
+				var atm = implementation.automaton;
+				var simulate = function(){
+			        atm = implementation.App.updateSimulation(atm);
+		            implementation.App.updateVisual(atm);
+			    };
+				/*var animatedSimulation = function(){
+			        simulate();
+			        if (animId) {
+			          return animId = requestAnimationFrame(animatedSimulation);
+			        }
+		        };
+	   	        var start = function(){
+			        return animId = requestAnimationFrame(animatedSimulation);
+			    };*/
+
+			    atm.initialize(function(pos){
+			    	return centerBlock(atm.size, pos);
+			    });
+			    setInterval(simulate,20);
+			});
+		</script>
+	</body>
+</html>

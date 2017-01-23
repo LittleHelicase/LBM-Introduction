@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Introduction to Lattice Boltzmann</title>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="lib/handlebars.js"> </script>
+  <script src="mathjax.js"></script>
+  <script src="http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:100,600' rel='stylesheet' type='text/css' />
+  <script>
+    // dzslides overwrites $
+    jQuery.noConflict();
+  </script>
+</head>
+<body>
+<!-- Your Slides -->
+<!-- One section is one slide -->
+
+<section>
+    <!-- This is the first slide -->
+    <h1>Lattice Boltzmann</h1>
+    <h3>Introduction</h3>
+    <footer>by Maximilian Klein</footer>
+</section>
+
+<section>
+    <!-- This is the first slide -->
+    <h1><span style="color: #bbb;">Lattice</span> Boltzmann</h1>
+    
+    <footer>by Maximilian Klein</footer>
+</section>
+
+<section>
+  <blockquote>
+    Every process occurring in nature proceeds in the sense in which the sum of the entropies of all bodies taking part in the process is increased
+  </blockquote>
+  <cite>Second Law of Thermodynamics</cite>
+</section>
+
+<section>
+  <h1>But!</h1>
+  <p>Boltzmann looked at the microscopic world...</p>
+</section>
+
+<section>
+  <h2>Boltzmanns assumes</h2>
+  <p><center>Most important <b>microscopic interactions</b> are<br/>  <br/>
+   <b>ideal / reversible / fully elastic</b></center></p>
+</section>
+
+<section>
+  <h2>But...</h2>
+  <p>That <b>contradicts</b> the 2nd law of Thermodynamics</p>
+</section>
+
+<section>
+  <h1>Why?</h1>
+  <p>Boltzmanns theory is <b>accomplished</b>!</p>
+  <footer>Probably everybody else "cheats" !?</footer>
+</section>
+
+<section>
+  <h2>Macro-irreversibility</h2>
+  <p>Boltzmann's problem <br/> <b>macroscopic irreversibility</b><br/> based on <br/> <b>microscopic reversibility</b></p>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible1.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible2.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible3.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible4.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible5.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible6.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible7.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible8.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible9.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible10.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible11.png" width="1400" /></center>
+</section>
+
+<section>
+  <h3>Reversibility example</h3>
+  <center><img src="img/irreversible12.png" width="1400" /></center>
+</section>
+
+<section>
+  <h1>Quiet a deal breaker!</h1>
+  <p>We <b>believe</b> the macroscopic world to follow the <br><b>Rules of Thermodynamics</b></p>
+</section>
+
+<section>
+  <h1>Loschmidt's paradox</h1>
+
+  <p>This problem is called Loschmidt's paradox, but Boltzmann <b>"solved"</b> it.</p>
+</section>
+
+<section>
+  <h2>It's all about probability</h2>
+
+  <p>1. There are <b>many</b> microstates leading <b>to one</b> macrostate</p>
+</section>
+
+<section>
+  <h2>It's all about probability</h2>
+
+  <p>2. <b>A lot</b> of microstates have high entropy</p>
+</section>
+
+<section>
+  <h2>It's all about probability</h2>
+
+  <p>3. <b>Very few</b> of microstates have low entropy</p>
+</section>
+
+<section>
+  <h2>It's all about probability</h2>
+
+  <p>4. <b>A lot</b> of them lead to <b>higher</b> entropy</p>
+</section>
+
+<section>
+  <h2>It's all about probability</h2>
+
+  <p>5. <b>Very few</b> of them lead to <b>lower</b> entropy</p>
+  <footer>Boltzmann proofed that those are only an empty set!</footer>
+</section>
+
+<section>
+  <blockquote>
+    Every process occurring in nature proceeds in the sense in which the sum of the entropies [...] is <b>nearly always</b> increased
+  </blockquote>
+  <cite><b style="color: red">Boltzmann's</b> Second Law of Thermodynamics</cite>
+</section>
+
+<section>
+  <h1>What's right?</h1>
+  <p>Boltzmann grounds his assumptions on <b>molecular chaos</b></p>
+</section>
+
+<section>
+  <h2>Contraposition</h2>
+  <p>Loschmidt et al.: <br/><b>chaos assumption is wrong</b><br/>there is <b>order on microscale</b></p>
+</section>
+
+<section>
+  <h1>Boltzmann advantages</h1>
+  <ul>
+    <li>Simplicity</li>
+    <li>Ergodicity (mostly used in Simulated Annealing)</li>
+    <li>Natural Parallelization</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Ergodicity</h1>
+  <center>Inspect <b>one</b> particle for a <b>long</b> time</center>
+  $$\Leftrightarrow$$
+  <center>Inspect <b>multiple</b> particles for a <b>short</b> time</center>
+  <footer>Particles = Microscale, Inspection process = Macroscale</footer>
+</section>
+
+<section>
+    <h1><span style="color: #bbb;">Lattice</span> Boltzmann</h1>
+    
+</section>
+
+<section>
+  <h1>Lattice <span style="color: #bbb;">Boltzmann</span></h1>
+    
+</section>
+  
+<section>
+  <h1>Simulation of Microstructure</h1>
+</section>
+
+<section>
+  <h2>Microstructure <br/> = <br/> Particle Movement...</h2>
+  <footer>At least for the rest of this talk</footer>
+</section>
+
+<section>
+  <h1>Particle Movement...</h1>
+  <p>With microscale laws</p>
+  <footer>Those postulated by Boltzmann</footer>
+</section>
+
+<section>
+  <h1>No! Macroscopic Model</h1>
+</section>
+
+<section class="images">
+  <h3>Smoothed Particle Hydrodynamics (SPH)</h3>
+
+  <table>
+  <tr>
+  <td>
+  <figure>  
+    <img src="img/liquid-particles.jpg" />
+    <figcaption>Particles</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    
+  </figure>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <figure>
+    
+  </figure>
+  </td>
+  <td>
+  <figure>
+    
+  </figure>
+  </td>
+  </tr>
+  </table>
+</section>
+
+<section class="images">
+  <h3>Smoothed Particle Hydrodynamics (SPH)</h3>
+
+  <table>
+  <tr>
+  <td>
+  <figure>  
+    <img src="img/liquid-particles.jpg" />
+    <figcaption>Particles</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <img src="img/kernelpic.jpg" />
+    <figcaption>Kernel / Neighborhood</figcaption>
+  </figure>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <figure>
+    
+  </figure>
+  </td>
+  <td>
+  <figure>
+    
+  </figure>
+  </td>
+  </tr>
+  </table>
+</section>
+
+<section class="images">
+  <h3>Smoothed Particle Hydrodynamics (SPH)</h3>
+
+  <table>
+  <tr>
+  <td>
+  <figure>  
+    <img src="img/liquid-particles.jpg" />
+    <figcaption>Particles</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <img src="img/kernelpic.jpg" />
+    <figcaption>Kernel / Neighborhood</figcaption>
+  </figure>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <figure>
+    <img src="img/ns.jpg" />
+    <figcaption>Macroscopic Model</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+
+  </figure>
+  </td>
+  </tr>
+  </table>
+</section>
+
+<section class="images">
+  <h3>Smoothed Particle Hydrodynamics (SPH)</h3>
+
+  <table>
+  <tr>
+  <td>
+  <figure>  
+    <img src="img/liquid-particles.jpg" />
+    <figcaption>Particles</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <img src="img/kernelpic.jpg" />
+    <figcaption>Kernel / Neighborhood</figcaption>
+  </figure>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <figure>
+    <img src="img/ns.jpg" />
+    <figcaption>Macroscopic Model</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <img src="img/meta_fluid_sc.png" />
+    <!-- http://www.local-guru.net/blender/meta_fluid_sc.png -->
+    <figcaption>Fluid / Gas</figcaption>
+  </figure>
+  </td>
+  </tr>
+  </table>
+</section>
+
+<section class="images">
+  <h3>Smoothed Particle Hydrodynamics (SPH)</h3>
+
+  <table>
+  <tr>
+  <td>
+  <figure>  
+    <img src="img/liquid-particles.jpg" />
+    <figcaption>Particles</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <img src="img/kernelpic.jpg" />
+    <figcaption>Kernel / Neighborhood</figcaption>
+  </figure>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <figure>
+    <img src="img/ns.jpg" />
+    <figcaption><b style="color: red">Macroscopic Model</b></figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <img src="img/meta_fluid_sc.png" />
+    <!-- http://www.local-guru.net/blender/meta_fluid_sc.png -->
+    <figcaption>Fluid / Gas</figcaption>
+  </figure>
+  </td>
+  </tr>
+  </table>
+</section>
+
+<section>
+  <h1>Lattice Gas</h1>
+
+  <p>Works differently...</p>
+   <center>( Lattice Gas = Lattice Boltzmann prototype )</center>
+</section>
+
+<section>
+  <h1>No Free Movement</h1>
+
+  <p>Lattice Gas discretizes position and velocity drastically</p>
+</section>
+
+<section class="images">
+  <h3>The Lattices</h3>
+
+  <table>
+  <tr>
+  <td>
+  <figure>  
+    <img src="img/2dgrid.png" />
+    <figcaption>2D Rectangular Lattice (D2Q4)</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <img src="img/2dhexgrid.png" />
+    <figcaption>2D Hex Lattice (D2Q6)</figcaption>
+  </figure>
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <figure>
+    <!-- http://cell-auto.com/neighbourhood/3dmoore/ -->
+    <img src="img/3dgrid-center.png" width="300" />
+    <figcaption>3D Lattice (D2Q26)</figcaption>
+  </figure>
+  </td>
+  <td>
+  <figure>
+    <!-- http://cell-auto.com/neighbourhood/3dmoore/ -->
+    <img src="img/3dgrid.png" width="300" />
+    <figcaption>3D Neighbors</figcaption>
+  </figure>
+  </td>
+  </tr>
+  </table>
+</section>
+
+<section>
+  <h1>Discret Velocities</h1>
+
+  <p>There are only a few possible velocities</p>
+</section>
+
+<section>
+  <h2>2D Lattice Velocities</h2>
+
+  <p></p>
+  <center>
+  <figure>
+    <img src="img/vel-dirs.png" width="500" />
+    <figcaption>Exactly 4 velocities possible!</figcaption>
+  </figure>
+  </center>
+</section>
+
+<section>
+  <h1>HPP Method (1973)</h1>
+
+  <p>The first Lattice Gas prototype</p>
+  <footer>HPP = Hardy, Pomeau and de Pazzis (authors), <a href="http://dx.doi.org/10.1063/1.1666248">http://dx.doi.org/10.1063/1.1666248</a></footer>
+</section>
+
+<section>
+  <h1>Pauli Principle</h1>
+
+  <p>HPP uses a kind of <b>exclusion principle</b> like for electrons in atoms</p>
+</section>
+
+<section>
+  <h1>1 Particle per Direction</h1>
+
+  <center>
+  <table><tr><td>
+  <img src="img/hpp-cell1.png" /></td> <td>$$\Leftrightarrow$$ </td><td> <img src="img/hpp-cell2.png" /></td>
+  </tr></table>
+  </center>
+  <footer>Yes, up to 4 particles per cell!</footer>
+</section>
+
+<section>
+  <h2>Simple Propagation</h2>
+  <p></p>
+  <center>
+  <table><tr><td>
+    <img src="img/hpp-prop-left.gif" /><br/><br/>
+    <img src="img/hpp-prop-right.gif" />
+  </td><td style="width:100px"></td><td>
+    <img src="img/hpp-prop-bottom.gif" /> &nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="img/hpp-prop-top.gif" />
+  </td></tr></table>
+  </center>
+  <footer>With periodic boundary conditions</footer>
+</section>
+
+<section>
+  <h2>Propagation Operator</h2>
+  <br/>
+  <center><table style="border-spacing:40px;"><tr>
+  <td>$\mathcal{P}($<img src="img/hpp-pre-prop.png" />$)$</td><td>=</td><td><img src="img/hpp-post-prop.png" /></td><td>$\ldots$</td>
+  </tr></table></center>
+  <ul>
+    <li>Conserves Mass</li>
+    <li>Conserves Momentum</li>
+  </ul>
+  <footer>A green dashed circle <img src="img/hpp-dont-care.png" width="32" /> indicates, that we don't know / care for the value</footer>
+</section>
+
+<section>
+  <h1>Collisions</h1>
+  <p></p>
+  <center><img src="img/hpp-coll.gif" /></center>
+</section>
+
+<section>
+  <h2>Collision Operator</h2>
+  <br/>
+  <center><table style="border-spacing:40px;"><tr>
+  <td>$\mathcal{C}($<img src="img/hpp-head-on-hor.png" />$)$</td><td>=</td><td><img src="img/hpp-head-on-ver.png" /></td><td>,</td>
+  <td>$\mathcal{C}($<img src="img/hpp-head-on-ver.png" />$)$</td><td>=</td><td><img src="img/hpp-head-on-hor.png" /></td>
+  </tr></table></center>
+  <ul>
+    <li>Conserves mass</li>
+    <li>Conserves momentum</li>
+  </ul>
+  <footer>The Collision Operator does nothing in all other cases </footer>
+</section>
+
+<section>
+  <h2>Collision remark</h2>
+  <p>
+    It is <b>unclear</b> which particle is which after a collision.<br/>
+    But we assume <b>Ergodicity</b>!
+  </p>
+</section>
+
+<section>
+  <h2>The Whole HPP</h2>
+  $$S_{t+1} = E S_t = \mathcal{P}\mathcal{C} S_t$$
+
+  <p>E = time evolution Operator<br/>
+  S<sub>t</sub> = Lattice State at time t</p>
+  <footer>P,C are propagation and collision operator</footer>
+</section>
+
+<section id="mean-slide">
+  <h2>"Mean" Process</h2>
+  <iframe id="mean-iframe" style="position:absolute; left:500px; top:600px;border:0;width:1400px; height:700px" ></iframe>
+</section>
+<!-- iframe drains a lot of performance, so deactivate it, when not shown -->
+<script>
+  var controlMeanIFrame = function(){
+    var activateIframe = function(){
+      var meanSlide = jQuery("#mean-slide");
+      if(meanSlide.attr("aria-selected") == "true"){
+        var iframe = jQuery("#mean-iframe");
+        iframe.attr("src", "examples/hpp-small.html");
+      }
+      else{
+        var iframe = jQuery("#mean-iframe");
+        iframe.attr("src", "");
+      }
+    }
+    setTimeout(activateIframe, 500);
+  }
+  jQuery(window).bind("hashchange", controlMeanIFrame);
+</script>
+
+<section id="hpp-slide">
+  <h1>Waves in HPP</h1>
+  <iframe id="hpp-iframe" style="position:absolute; left:50px; top:700px;border:0;width:1700px; height:700px;" ></iframe>
+</section>
+<script>
+  var controlHppWaveIFrame = function(){
+    var activateIframe = function(){
+      var meanSlide = jQuery("#hpp-slide");
+      if(meanSlide.attr("aria-selected") == "true"){
+        var iframe = jQuery("#hpp-iframe");
+        iframe.attr("src", "examples/hpp.html");
+      }
+      else{
+        var iframe = jQuery("#hpp-iframe");
+        iframe.attr("src", "");
+      }
+    }
+    setTimeout(activateIframe, 500);
+  }
+  jQuery(window).bind("hashchange", controlHppWaveIFrame);
+</script>
+
+<section>
+  <h1>HPP Problems</h1>
+  <ul>
+    <li>Noise</li>
+    <li>Conservation of Momentum per row / column</li>
+    <li>No solution to Navier-Stokes</li>
+  </ul>
+</section>
+
+<section>
+  <h1>HPP Improvements</h1>
+  <p>Several methods try to solve the <b>diseases</b> of HPP</p>
+</section>
+
+<section>
+  <h1>FHP Method (1986)</h1>
+  <p>Very similar to HPP but with a hex grid</p>
+  <footer>FHP = Frisch, Hasslacher and Pomeau</footer>
+</section>
+
+<section>
+  <h1>FHP Hexgrid</h1>
+  <center>
+  <figure>
+  <img src="img/fhphex.png" />
+  <figcaption>6 different velocities</figcaption>
+  </figure>
+  </center>
+  <footer>All velocities must add up to 0 (symmetry condition)</footer>
+</section>
+
+<section>
+  <h1>FHP Propagation</h1>
+  <center><table style="border-spacing:40px;"><tr>
+  <td>$\mathcal{P}($<img src="img/fhp-pre-prop.png" height="50" />$)$</td><td>=</td><td><img src="img/fhp-post-prop.png" height="50" /></td><td>$\ldots$</td>
+  </tr></table></center>
+  <ul>
+    <li>Conserves Mass</li>
+    <li>Conserves Momentum</li>
+  </ul>
+</section>
+
+<section>
+  <h2>FHP Collision</h2>
+  <br/>
+  <center><table style="border-spacing:40px;"><tr>
+  <td>$\;\;\mathcal{C}($<img src="img/fhp-pre-collide.png" height="50" />$)$=<img src="img/fhp-post-collide1.png" height="50" /></td><td></td>
+  <td style="width:790px;"></td>
+  </tr></table></center>
+  <ul>
+    <li>Conserves mass</li>
+    <li>Conserves momentum</li>
+  </ul>
+  <footer>The more collision scenarios, the better! </footer>
+</section>
+
+<section>
+  <h2>FHP Collision</h2>
+  <br/>
+  <center><table style="border-spacing:40px;"><tr>
+  <td>$\;\;\mathcal{C}($<img src="img/fhp-pre-collide.png" height="50" />$)$=<img src="img/fhp-post-collide2.png" height="50" /></td><td></td>
+  <td style="width:790px;"></td>
+  </tr></table></center>
+  <ul>
+    <li>Conserves mass</li>
+    <li>Conserves momentum</li>
+  </ul>
+  <footer>The more collision scenarios, the better! </footer>
+</section>
+
+<section>
+  <h2>FHP Collision</h2>
+  <br/>
+  <center><table style="border-spacing:40px;"><tr>
+  <td>$Pr(\mathcal{C}($<img src="img/fhp-pre-collide.png" height="50" />$)$=<img src="img/fhp-post-collide1.png" height="50" />$) = 0.5$</td><td>&nbsp;</td>
+  <td style="width:610px;"></td>
+  </tr></table></center>
+  <ul>
+    <li>Conserves mass</li>
+    <li>Conserves momentum</li>
+  </ul>
+  <footer>The more collision scenarios, the better! </footer>
+</section>
+
+<section>
+  <h2>FHP Collision</h2>
+  <br/>
+  <center><table style="border-spacing:40px;"><tr>
+  <td>$Pr(\mathcal{C}($<img src="img/fhp-pre-collide.png" height="50" />$)$=<img src="img/fhp-post-collide1.png" height="50" />$) = 0.5$</td><td>,</td>
+  <td>$Pr(\mathcal{C}($<img src="img/fhp-pre-collide.png" height="50" />$)$=<img src="img/fhp-post-collide2.png" height="50" />$) = 0.5$</td>
+  </tr></table></center>
+  <ul>
+    <li>Conserves mass</li>
+    <li>Conserves momentum</li>
+  </ul>
+  <footer>The more collision scenarios, the better! </footer>
+</section>
+
+<section>
+ <h3>Diseases of Lattice Gas</h3>
+ <div>All LG have diseases like</div>
+ <ul>
+   <li>Spurious invariants</li>
+   <li>Violation of Galilei invariance</li>
+   <li>Noise</li>
+   <li>...</li>
+ </ul>
+
+ <footer>There are several cures, but it gets a bit hacky</footer>
+</section>
+
+<section>
+  <h2>The worst</h2>
+  <p>Collisions Operator determines macroscropic model</p>
+</section>
+
+<section>
+  <h2>The worst</h2>
+  <p>Finite (very limited!) number of possible collision Operators</p>
+</section>
+
+<section>
+  <h2>The worst</h2>
+  <p>Finite set of possible Macroscopic models</p>
+</section>
+
+<section>
+  <h2>The worst</h2>
+  <p>In General:<br/>No possibility to simulate fluid with given viscosity</p>
+</section>
+
+<section>
+  <h1>Lattice <span style="color: #bbb;">Boltzmann</span></h1>
+</section>
+
+<section>
+  <h1>Lattice Boltzmann</h1>
+</section>
+
+<section>
+  <h3>Lattice Boltzmann Equation (LBE)</h3>
+  <br/>
+  $$n_i(\mathbf{x} + \mathbf{c}_i \Delta t, t_0+\Delta t) = n_i(\mathbf{x},t_0) + \Delta_i$$
+
+  <p>Discrete "Master"-Equation for all Lattice methods</p>
+
+  <footer>$\Delta_i$ is the collision operator</footer>
+</section>
+
+<section>
+  <h3>Lattice Boltzmann Equation (LBE)</h3>
+  <br/>
+  $$n_i(\mathbf{x} + \mathbf{c}_i \Delta t, t_0+\Delta t) = n_i(\mathbf{x},t_0) + \Delta_i$$
+  <center>
+    <figure>
+      <img src="img/lbe1.png" />
+    </figure>
+  </center>
+
+  <footer>$\Delta_i$ is the collision operator</footer>
+</section>
+
+<section>
+  <h3>Lattice Boltzmann Equation (LBE)</h3>
+  <br/>
+  $$n_i(\mathbf{x} + \mathbf{c}_i \Delta t, t_0+\Delta t) = n_i(\mathbf{x},t_0) + \Delta_i$$
+  <center>
+    <figure>
+      <img src="img/lbe2.png" />
+    </figure>
+  </center>
+
+  <footer>$\Delta_i$ is the collision operator</footer>
+</section>
+
+<section>
+  <h3>Lattice Boltzmann Equation (LBE)</h3>
+  <br/>
+  $$n_i(\mathbf{x} + \mathbf{c}_i \Delta t, t_0+\Delta t) = n_i(\mathbf{x},t_0) + \Delta_i$$
+  <center>
+    <figure>
+      <img src="img/lbe3.png" />
+    </figure>
+  </center>
+
+  <footer>$\Delta_i$ is the collision operator, we assume there are <b>no collisions</b></footer>
+</section>
+
+<section>
+  <h3>Lattice Boltzmann Equation (LBE)</h3>
+  <br/>
+  $$n_i(\mathbf{x} + \mathbf{c}_i \Delta t, t_0+\Delta t) = n_i(\mathbf{x},t_0) + \Delta_i$$
+  <center>
+    <figure>
+      <img src="img/lbe4.png" />
+    </figure>
+  </center>
+
+  <footer>$\Delta_i$ is the collision operator, we assume there are <b>no collisions</b></footer>
+</section>
+
+<section>
+  <h3>Lattice Boltzmann Equation (LBE)</h3>
+  <br/>
+  $$n_i(\mathbf{x} + \mathbf{c}_i \Delta t, t_0+\Delta t) = n_i(\mathbf{x},t_0) + \Delta_i$$
+  <center>
+    <figure>
+      <img src="img/lbe5.png" />
+    </figure>
+  </center>
+
+  <footer>$\Delta_i$ is the collision operator, we assume there are <b>no collisions</b></footer>
+</section>
+
+<section>
+  <h3>Lattice Boltzmann Equation (LBE)</h3>
+  <br/>
+  $$n_i(\mathbf{x} + \mathbf{c}_i \Delta t, t_0+\Delta t) = n_i(\mathbf{x},t_0) + \Delta_i$$
+  <center>
+    <figure>
+      <img src="img/lbe6.png" />
+    </figure>
+  </center>
+
+  <footer>$\Delta_i$ is the collision operator, we assume there are <b>no collisions</b></footer>
+</section>
+
+<section>
+  <h1>Advection ?</h1>
+</section>
+
+<section>
+  <div style="margin-top: 300px;"></div>
+  <center><img src="img/adv0.jpg" /></center>
+</section>
+
+<section>
+  <div style="margin-top: 150px;"></div>
+  <center><img src="img/adv1.jpg" /></center>
+</section>
+
+<section>
+  <div style="margin-top: 150px;"></div>
+  <center><img src="img/adv2.jpg" /></center>
+</section>
+
+<section>
+  <div style="margin-top: 300px;"></div>
+  <center><img src="img/adv5.png" width="800" /></center>
+</section>
+
+<section>
+  <h2>Advection</h2>
+  $$\frac{\partial f}{\partial t} + \mathbf v \nabla f = 0$$
+</section>
+
+<section>
+  <h2>Advection</h2>
+  $$\frac{\partial f}{\partial t} = - \mathbf v \nabla f$$
+  <center><div>Function change over time<br/> =<br/> Function change in (&ndash;) velocity direction. </div></center>
+</section>
+
+<section>
+  <h2>Advection</h2>
+  <center><img src="img/adv-eq1.png" width="880" style="margin-left:35px;margin-top:-7px;"/></center>
+</section>
+
+<section>
+  <h2>Advection</h2>
+  <center><img src="img/adv-eq2.png" width="880" style="margin-left:35px;margin-top:-7px;"/></center>
+  <center><div>Directional Derivative = change of function in $\mathbf v$ direction.</div>
+</section>
+
+<section>
+  <h2>Boltzmann Equation</h2>
+  $$\frac{\partial f}{\partial t} + \mathbf v \nabla f = Q = \left. \frac{\partial f}{\partial t} \right|_{Stoss}$$
+
+  <p>Results in Navier-Stokes for certain Q</p>
+
+  <footer>$Q$ is the collision operator / no external forces</footer>
+</section>
+
+<section>
+  <p>Lattice Boltzmann equation $$\approx$$ Discretization of<br/> Boltzmann equation</p>
+  <footer>for continuous $n$ in the Lattice Boltzmann equations / LBE is dimensionless.</footer>
+</section>
+
+<section>
+  <h2>Stoßzahlansatz</h2>
+  <p>Boltzmann used the Stoßzahlansatz in his work for the collisions</p>
+  <footer>Too complex for now and not necessary for the rest...</footer>
+</section>
+
+<section>
+  <h1>Twoards Equilibrium</h1>
+  <p>Equilibrium is the state in which all actions equal out</p>
+  <footer>In our case: actions = collisions and propagation</footer>
+</section>
+
+<section>
+  <h2>Stoßzahl Equilibrium</h2>
+  $$\left. \frac {\partial f} {\partial t} \right|_{Stoss} = 0$$
+  <p>Collisions have no net effect!</p>
+</section>
+
+<section>
+  <h2>Maxwell distribution</h2>
+  <center>
+  <iframe src="examples/maxwell-plot.html" style="position:absolute; left:50px; top:500px;border:0;width:1500px; height:700px;" > </iframe>
+  <figure>
+    <figcaption>The maximum entropy equilibrium...</figcaption>
+  </figure>
+  </center>
+</section>
+
+<section>
+  <h2>Collision term approximation</h2>
+  <p>Usually $\left. \frac {\partial f} {\partial t} \right|_{Stoss}$ is aproximated</p>
+  <footer>The BGK approximation will follow soon</footer>
+</section>
+
+<section>
+  <h2>Important collisions</h2>
+  <p>Navier-Stokes via LB requires a lot of collisions scenarios!</p>
+
+  <div>Collision Frequency will determine viscosity</div>
+  <footer>E.g. HPP has far too less collision types</footer>
+</section>
+
+<section>
+  <h2>Lattice Boltzmann method</h2>
+  <p>At last a fully working LBM method without "diseases"</p>
+</section>
+
+<section>
+  <h1>3 Parts of LBM</h1>
+  <ul>
+    <li>A lattice: <b>D2Q9</b> (multispeed)</li>
+    <li>An equilibrium distribution: <b>Maxwell</b></li>
+    <li>Collision implementation/approximation: <b>BGK</b></li>
+  </ul>
+</section>
+
+<section>
+  <h2>D2Q9</h2>
+  <center>
+  <figure>
+    <img src="img/fbm-d2q9.png" />
+    <figcaption>One cell with 9 velicoty types with continuous values</figcaption>
+  </figure>
+  </center>
+</section>
+
+<section>
+  <h2>D2Q9</h2>
+  <center>
+  <figure>
+    <img src="img/fbm-d2q9-c.png" />
+    <figcaption>One cell with 9 velicoty types with continuous values<br/>The middle one has zero speed</figcaption>
+  </figure>
+  </center>
+</section>
+
+<section>
+  <h2>D2Q9</h2>
+  <center>
+  <figure>
+    <img src="img/fbm-d2q9-F.png" />
+    <figcaption>Continuous values are indicated by $F_i$</figcaption>
+  </figure>
+  </center>
+</section>
+
+
+<section>
+  <h2>Marcoscopic Properties</h2>
+  <ul>
+    <li>Density: $\rho(\mathbf x,t) = \sum_i F_i(\mathbf x, t)$</li>
+    <li>Momentum density: $\mathbf j(\mathbf x,t) = \sum_i \mathbf c_i F_i$</li>
+  </ul>
+</section>
+
+<section>
+  <h2>LBM Propagation</h2>
+  <center><p>$\mathcal P($ <img src="img/lbm-pre-prop.png" height="110" /> $)$ = <img src="img/lbm-post-prop.png"  height="110" /> , $\ldots$</p></center>
+  <p>Conserves mass and momentum</p>
+</section>
+
+<section>
+  <h2>LBM Collision</h2>
+  <center><p>$\mathcal C($ <img src="img/fbm-pre-col.png" height="110" /> $)$ = <img src="img/lbm-post-col2.png"  height="110" /></p></center>
+  <p>Conserves mass and momentum</p>
+</section>
+
+<section>
+  <h2>LBM Collision</h2>
+  <center><p>$\mathcal C($ <img src="img/fbm-pre-col.png" height="110" /> $)$ = <img src="img/lbm-post-col3.png"  height="110" /></p></center>
+  <p>Conserves mass and momentum</p>
+</section>
+
+<section>
+  <h2>LBM Collision</h2>
+  <center><p>$\mathcal C($ <img src="img/fbm-pre-col.png" height="110" /> $)$ = <img src="img/lbm-post-col4.png"  height="110" /></p></center>
+  <p>Conserves mass and momentum</p>
+</section>
+
+<section>
+  <h2>LBM Collision</h2>
+  <center><p>$\mathcal C($ <img src="img/fbm-pre-col.png" height="110" /> $)$ = <img src="img/lbm-post-col5.png"  height="110" /></p></center>
+  <p>Conserves mass and momentum</p>
+</section>
+
+<section>
+  <h2>LBM Collision</h2>
+  <center><p>$\mathcal C($ <img src="img/fbm-pre-col.png" height="110" /> $)$ = <img src="img/lbm-post-col6.png"  height="110" /></p></center>
+  <p>Conserves mass and momentum</p>
+</section>
+
+<section>
+  <h1>That's bad!</h1>
+</section>
+
+<section>
+  <h1>That's bad!</h1>
+  <p>Infinite choices!</p>
+</section>
+
+<section>
+  <h1>No, that's good</h1>
+  <p>Viscosity and macroscopic model can define collision Operator</p>
+</section>
+
+<section>
+  <h2>D2Q9 in equilibrium</h2>
+  $$F_i(\mathbf x,t) = F_j(\mathbf x,t), \forall i,j \quad \text{?}$$
+  <center><figure>
+    <img src="img/fbm-eq.png" width="400"/>
+  </figure></center>
+</section>
+
+<section>
+  <h1>Nope!</h1>
+</section>
+
+<section>
+  <h1>Nope!</h1>
+  <center><div>We have a multispeed discretisation</div></center>
+</section>
+
+<section>
+  <h1>Nope!</h1>
+  <center><div>We want a Maxwell-Distribution<span style="color:white">, globally!</span></div></center>
+</section>
+
+<section>
+  <h1>Nope!</h1>
+  <center><div>We want a Maxwell-Distribution, globally!</div></center>
+</section>
+
+<section>
+  <h1>Equilibrium Goal</h1>
+  <p>Find <b>local</b> "equilibrium" "near"<center>$F_i(x,t)$</center></p>
+</section>
+
+<section>
+  <h2>Near Equilibrium assumption</h2>
+  $$F_i(x,t) = W_i + f_i(x,t)$$
+  <div>We are usually near a global equilibrium $W_i$</div>
+  $$f_i(x,t) << W_i$$
+</section>
+
+<section>
+  <h2>Collisions $$\downarrow$$ Local Equilibrium</h2>
+</section>
+
+<section>
+  <h2>Transport + Collision $$\downarrow$$ Global Equilibrium</h2>
+</section>
+
+<section>
+  <h1>3 Steps</h1>
+  <p>1. Calculate $W_i$</p>
+  <footer>Global Equilibrium depends on avarage velocity and density</footer>
+</section>
+
+<section>
+  <h1>3 Steps</h1>
+  <p>2. Calculate "<b>Best</b>" Local equilibrium </p>
+  <footer>Local Equilibrium is the equilibrium with local density and velocity values</footer>
+</section>
+
+<section>
+  <h1>3 Steps</h1>
+  <p>3. Use Collision approximation to reach global equilibrium</p>
+</section>
+
+<section>
+  <h1>Global Equilibrium</h1>
+  <p>Find discrete set of $W_i$ that are of Maxwell distribution</p>
+</section>
+
+<section>
+  <h1>$W_i$ idea</h1>
+  <p>Use velocity moments to create discrete version of Maxwell distribution</p>
+</section>
+
+<section>
+  <h1></h1>
+  <p>$$W_i \sim \rho_0 M$$</p>
+  <center><div>M is a Maxwell distribution with density function $m(\mathbf v)$</div></center>
+</section>
+
+<section>
+  <h1>Zeroth Moment</h1>
+  $$\sum_i W_i = \rho_0$$
+</section>
+
+<section>
+  <h1>First Moment</h1>
+  $$\sum_i W_i c_j = 0$$
+</section>
+<!--
+<section>
+  <h1>First Moment</h1>
+  $$\sum_i W_i c_j = 0$$
+  <center><div>Of no use...</div></center>
+  <div style="position:absolute; bottom:40px;right:40px"><img src="img/fbm-first-moment.png" width="500"></div>
+</section>
+
+<section>
+  <h1>First Moment</h1>
+  $$\sum_i W_i c_j = 0$$
+  <center><div>All odd moments are of no use...</div></center>
+</section>
+-->
+<section>
+  <h1>Second Moment</h1>
+  $$\sum_i W_i c_j c_k = \int \rho_0 m_B(\mathbf v) \mathbf v_j \mathbf v_k \; d\mathbf v$$
+</section>
+
+<section>
+  <h1>Second Moment</h1>
+  <center style="margin-top:-30px;"><img src="img/fbm-second-moment.png" widht="1100" /></center>
+</section>
+
+<section>
+  <h1>Fourth Moment</h1>
+  <center><p>...</p></center>
+</section>
+
+<section>
+  <h2>Global Equilibrium</h2>
+  \begin{align}
+    W_0 &= \frac{4}{9} \rho_0 \\
+    W_{1,3,5,7} &= \frac{1}{9} \rho_0 \\
+    W_{2,4,6,8} &= \frac{1}{36} \rho_0 \\
+  \end{align}
+</section>
+
+<section>
+  <h2>Global Equilibrium</h2>
+  <br/>
+  <center><img src="img/lbm-eq-W.png" /></center>
+</section>
+
+<section>
+  <h1>Local Equilibrium</h1>
+  <p>Simply $W_i$ for other values of $\rho$ and $\mathbf v$?</p>
+</section>
+
+<section>
+  <h1>No!</h1>
+  <center><div>Local Equilibrium $\neq$ Maxwellian Distribution</div></center>
+</section>
+
+<section>
+  <h2>Local Maximum Entropy</h2>
+  <center><div>Maxwellian = global maximum entropy</div></center>
+  <p>Local Equilibrium should tend to global Equilbirium</p>
+</section>
+
+<section>
+  <h2>Best Local Equilibrium</h2>
+  <br/>
+  <center>
+    <img src="img/fbm-twoards-W1.png" />
+  </center>
+</section>
+
+<section>
+  <h2>Best Local Equilibrium</h2>
+  <br/>
+  <center>
+    <img src="img/fbm-twoards-W2.png" />
+  </center>
+</section>
+
+<section>
+  <h2>Best Local Equilibrium</h2>
+  <br/>
+  <center>
+    <img src="img/fbm-twoards-W3.png" />
+  </center>
+</section>
+
+<section>
+  <h2>Best Local Equilibrium</h2>
+  <br/>
+  <center>
+    <img src="img/fbm-twoards-W4.png" />
+  </center>
+</section>
+
+<section>
+  <h1>4 Steps</h1>
+  <p>1. Define Line of local Equilibria</p>
+  <footer>Usually done by Lagrange multipliers</footer>
+</section>
+
+<section>
+  <h1>4 Steps</h1>
+  <p>2. Define Distance Function</p>
+  <div style="margin-top:-100px;">(In Terms of Entropy)</div>
+  <footer>Entropy distance can be measured by the relative Entropy</footer>
+</section>
+
+<section>
+  <h1>4 Steps</h1>
+  <p>3. Merge those two into one</p>
+  <footer>Via Lagrange Multiplier...</footer>
+</section>
+
+<section>
+  <h1>4 Steps</h1>
+  <p>4. Find Optimum</p>
+  <footer>The usual: Derive and look for roots</footer>
+</section>
+
+<section>
+  <h1>BGK approximation</h1>
+  <p>The collisions... at last</p>
+  <footer>BGK = Bhatnagar, Gross, Krook (authors)</footer>
+</section>
+
+<section>
+  <h2>BGK idea</h2>
+  <p>1. Calculate distance to equilibrium</p>
+  $$F_i^{(0)}(\mathbf x,t) - F_i(\mathbf x,t)$$
+</section>
+
+<section>
+  <h2>BGK idea</h2>
+  <p>2. Estimate collision time \(\tau\)</p>
+</section>
+
+<section>
+  <h2>BGK idea</h2>
+  <p>3. Calculate collision frequency \(\omega = \frac{\Delta t}{\tau}\)</p>
+  <footer>$\omega$ defines the viscosity</footer>
+</section>
+
+<section>
+  <h2>BGK idea</h2>
+  <p>4. Change is proportional to frequency and distance</p>
+</section>
+
+<section>
+  <h1>BGK approximation</h1>
+  $$\left. \frac{\partial f}{\partial t} \right|_{Stoss} \approx \omega \left[ F_i^{(0)}(\mathbf x,t) - F_i(\mathbf x,t)\right]$$
+</section>
+
+<section>
+  <h3>Full FBM (given $\rho, \mathbf v$ for every cell)</h3>
+  <ol>
+    <li>Initialize Cells with $F_i^{(0)}(\rho,\mathbf v)$ </li>
+    <li>Handle collisions with BGK</li>
+    <li>Propagate</li>
+    <li>Calculate new $F_i^{(0)}$ values and go to 2.</li>
+  </ol>
+</section>
+
+<section>
+  <h1>How good is it?</h1>
+  <p>Very good!</p>
+</section>
+
+<section>
+  <h1>How good is it?</h1>
+  <p>Very good!</p>
+  <div style="margin-top:-150px;">Always conserves energy!</div>
+</section>
+
+<section>
+  <h1>How good is it?</h1>
+  <p>Very good!</p>
+  <div style="margin-top:-150px;">Always conserves energy! <br/>(no fake energy loss like macroscopic models)</div>
+</section>
+
+<section>
+  <h1>Navier Stokes?</h1>
+  <p>Yes!</p>
+  <div style="margin-top:-150px;">Champan Enskog Multiscale analysis.</div>
+</section>
+
+<section>
+  <h3>LBM with immersed boundary method</h3>
+  <center>
+<!--  <iframe width="1280" height="720" src="http://www.youtube.com/embed/3xCFru5MjOg?rel=0" frameborder="0" allowfullscreen></iframe>-->
+  </center>
+</section>
+
+<section>
+  <h2>Thank you for your attention!</h2>
+  <p>Questions?</p>
+</section>
+
+<section>
+  <h2>Stoßzahlansatz</h2>
+
+  \begin{align*}
+  \left.{\frac  {\partial f}{\partial t}}\right|_{{\mathrm  {Stoss}}}=&\int W({\mathbf  {v}}_{1},{\mathbf  {v}}_{2},{\mathbf  {v}}_{3},{\mathbf  {v}}) \\& \left\{f({\mathbf  {x}},{\mathbf  {v}}_{1},t)f({\mathbf  {x}},{\mathbf  {v}}_{2},t) \right. - \\ & \left . f({\mathbf  {x}},{\mathbf  {v}}_{3},t)f({\mathbf  {x}},{\mathbf  {v}},t)\right\}{\text{d}}{\mathbf  {v}}_{1}{\text{d}}{\mathbf  {v}}_{2}{\text{d}}{\mathbf  {v}}_{3}
+  \end{align*}
+  <footer>Based on Boltzmanns molecular chaos assumption</footer>
+</section>
+
+<section>
+  <h2>Stoßzahlansatz</h2>
+
+  <img src="img/stosszahlansatz2.png" width="1475" style="margin-left:88px;margin-top:15px" />
+</section>
+
+<section>
+  <h2>Stoßzahlansatz</h2>
+
+  <img src="img/stosszahlansatz3.png" width="1475" style="margin-left:88px;margin-top:15px" />
+</section>
+
+<section>
+  <h3>Stoßzahlansatz with HPP</h3>
+
+  <div>We simply get</div>
+  <ul>
+    <li>$W($<img src="img/hpp-head-on-hor.png" />$,$<img src="img/hpp-head-on-ver.png" />$) = 1$</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Stoßzahlansatz with HPP</h3>
+
+  <div>We simply get</div>
+  <ul>
+    <li>$W($<img src="img/hpp-head-on-hor.png" />$,$<img src="img/hpp-head-on-ver.png" />$) = 1$</li>
+    <li>$f($<img src="img/hpp-cc0.png" />$) f($<img src="img/hpp-cc2.png" />$) = 0$ for a cell <img src="img/hpp-head-on-hor.png" /> (only to get the idea)</li>
+  </ul>
+  <footer>The $f(...)$ discretization is simplified and not very accurate</footer>
+</section>
+
+<section>
+  <h3>Stoßzahlansatz with HPP</h3>
+
+  <div>We simply get</div>
+  <ul>
+    <li>$W($<img src="img/hpp-head-on-hor.png" />$,$<img src="img/hpp-head-on-ver.png" />$) = 1$</li>
+    <li>$f($<img src="img/hpp-cc0.png" />$) f($<img src="img/hpp-cc2.png" />$) = 0$ for a cell <img src="img/hpp-head-on-hor.png" /></li>
+    <li>$f($<img src="img/hpp-cc1.png" />$) f($<img src="img/hpp-cc3.png" />$) = 1$ for a cell <img src="img/hpp-head-on-hor.png" /></li>
+  </ul>
+</section>
+
+<section>
+  <h3>Stoßzahlansatz with HPP</h3>
+
+  <div>We simply get</div>
+  <ul>
+    <li>$W($<img src="img/hpp-head-on-hor.png" />$,$<img src="img/hpp-head-on-ver.png" />$) = 1$</li>
+    <li>$f($<img src="img/hpp-cc0.png" />$) f($<img src="img/hpp-cc2.png" />$) = 0$ for a cell <img src="img/hpp-head-on-hor.png" /></li>
+    <li>$f($<img src="img/hpp-cc1.png" />$) f($<img src="img/hpp-cc3.png" />$) = 1$ for a cell <img src="img/hpp-head-on-hor.png" /></li>
+    <li>$W($<img src="img/hpp-head-on-hor.png" />$,$<img src="img/hpp-head-on-hor.png" />$) = 0$</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Stoßzahlansatz with FHP</h3>
+
+  <div>We simply get</div>
+  <ul>
+    <li>$W($<img src="img/fhp-pre-collide.png" height="50" />$,$<img src="img/fhp-post-collide1.png" height="50" />$) = 0.5$</li>
+    <li>$W($<img src="img/fhp-pre-collide.png" height="50" />$,$<img src="img/fhp-post-collide2.png" height="50" />$) = 0.5$</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Further Reading</h3>
+  <ul>
+    <li>Lattice-Gas Cellular Automata and Lattice Boltzmann Models- An Introduction, Wolf-Gardow, 2005</li>
+    <li>An efﬁcient immersed boundary-lattice Boltzmann method for the hydrodynamic interaction of elastic ﬁlaments, Tian et al, 2011</li>
+    <li>Molecular dynamics of a classical lattice gas: Transport properties and time correlation functions, Hardy et al, 1976</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Local Equilibrium</h2>
+
+  \begin{align}
+    F_i^{(0)} =& \frac{W_i}{\rho_0}\left (\rho + \frac{m}{k_B T} \mathbf c_i \mathbf j + \right. \\
+            &\left.\frac{m}{2 \rho k_B T} \left[ \frac{m}{k_B T} (\mathbf c_i \mathbf j)^2 - \mathbf j^2 \right]\right)
+  \end{align}
+</section>
+
+<section>
+  <h1>Viscosity</h1>
+  $$\nu = \frac{c^2}{3}\left(\tau - \frac{\Delta t}{2} \right)$$
+</section>
+
+<section>
+  <h2>BE with External Forces</h2>
+  $$\frac{\partial f}{\partial t} + v \nabla f + \frac{\mathbf K}{m}\frac{\partial f}{\partial \mathbf v} = Q$$
+  <footer>$\mathbf K$ are the external forces</footer>
+</section>
+
+<section>
+  <h3>Comparison with Spectral Method</h3>
+  <img style="position:absolute;left:150px;top:500px;" src="img/comp_sp_1.png" /> <img style="position:absolute;right:150px;top:500px;" src="img/comp_lbm_1.png" />
+  <footer>Martinez et al. Comparison of spectral method and lattice Boltzmann simulations of two‐dimensional hydrodynamics, 1994</footer>
+</section>
+
+<section>
+  <h3>Comparison with Spectral Method</h3>
+  <img style="position:absolute;left:150px;top:500px;" src="img/comp_sp_2.png" /> <img style="position:absolute;right:150px;top:500px;" src="img/comp_lbm_2.png" />
+</section>
+
+<section>
+  <h3>Comparison with Spectral Method</h3>
+  <img style="position:absolute;left:150px;top:500px;" src="img/comp_sp_3.png" /> <img style="position:absolute;right:150px;top:500px;" src="img/comp_lbm_3.png" />
+</section>
+
+<section>
+  <h3>Comparison with Spectral Method</h3>
+  <img style="position:absolute;left:150px;top:500px;" src="img/comp_sp_4.png" /> <img style="position:absolute;right:150px;top:500px;" src="img/comp_lbm_4.png" />
+</section>
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<script src="style/dzexstyle.css.js"></script>
+<script src="dzslides.js"></script>
+
+<!-- Default Style -->
+<script src="style/style.js"></script>
+<script src="style/dzexstyle.css.js"></script>
+<script src="style/style.css.js"></script>
+<script>
+jQuery(document).ready(function($){
+ 
+ jQueryLoadCSS = function(cssString) {
+     var cssTag = $("<style>" + cssString + "</style>");
+     $("head").append(cssTag); 
+ };
+
+ Dz.width = 1600;
+ Dz.height = 1200;
+ dztemplate = Handlebars.templates["dzexstyle.css"];
+ template = Handlebars.templates["style.css"];
+ loadCss(Dz, dztemplate, template, jQueryLoadCSS);
+
+ initializeMathjax();
+ controlMeanIFrame();
+});
+</script>
+<!-- vim: set fdm=marker: }}} -->
+</body>
+</html>
